@@ -24,7 +24,7 @@ module.exports = {
             res.status(500).json({ status: false, message: error.message });
         }
     },
-    getRandomRestaurant: async (req, res) => {
+    getRandomRestaurant: async (req, res) => { 
         const code = req.params.code;
         try {
             let randomRestaurant = [];
@@ -32,14 +32,14 @@ module.exports = {
                 randomRestaurant = await Restaurant.aggregate([
                     { $match: { code: code, isAvailable: true } },
                     { $sample: { size: 5 } },
-                    { $project: {__v:0 } }
+                    { $project: { __v: 0 } },
                 ]);
             }
             if (randomRestaurant.length === 0) {
                 randomRestaurant = await Restaurant.aggregate([
                     { $match: { code: code, isAvailable: true } },
                     { $sample: { size: 5 } },
-                    { $project: { __v:0 } }
+                    { $project: { __v: 0 } },
                 ]);
             }
             res.status(200).json({ status: true, randomRestaurant });
@@ -54,13 +54,13 @@ module.exports = {
             if (code) {
                 allNearByRestaurant = await Restaurant.aggregate([
                     { $match: { code: code, isAvailable: true } },
-                    { $project: { __v:0} }
+                    { $project: { __v: 0 } }
                 ]);
             }
             if (allNearByRestaurant.length === 0) {
                 allNearByRestaurant = await Restaurant.aggregate([
                     { $match: { code: code, isAvailable: true } },
-                    { $project: { __v:0 } }
+                    { $project: { __v: 0 } }
                 ]);
             }
             res.status(200).json({ status: true, allNearByRestaurant });

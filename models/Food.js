@@ -1,6 +1,6 @@
-const moongoose = require("moongoose");
+const moongoose = require("mongoose");
 
-const FoodSchema = moongoose.Scehema({
+const FoodSchema = moongoose.Schema({
     title: { type: String, required: true },
     time: { type: String, required: true },
     foodTags: { type: Array, required: true },
