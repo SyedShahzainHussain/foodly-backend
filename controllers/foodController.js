@@ -2,7 +2,7 @@ const Food = require('../models/Food');
 
 
 module.exports = {
-
+    // Todo Add Food
     addFood: async (req, res) => {
         const { title, foodTags, category, time, code, restaurant, description, price, additives, imageUrl } = req.body;
         if (!title || !foodTags || !category || !time || !code || !restaurant || !description || !price || !additives || !imageUrl) {
@@ -17,7 +17,7 @@ module.exports = {
         }
 
     },
-
+    // Todo Get Food By Id 
     getFoodById: async (req, res) => {
         const id = req.params.id;
         try {
@@ -27,7 +27,7 @@ module.exports = {
             res.status(500).json({ status: false, message: error.message });
         }
     },
-
+    // Todo Get Random Food
     getRandomFood: async (req, res) => {
         try {
             const code = req.params.code;
@@ -56,6 +56,7 @@ module.exports = {
             res.status(500).json({ status: false, message: e.message });
         }
     },
+    // Todo Get Food By Restaurant 
     getFoodsByRestaurant: async (req, res) => {
         const id = req.params.id;
         try {
@@ -65,6 +66,7 @@ module.exports = {
             res.status(500).json({ status: false, message: e.message });
         }
     },
+    // Todo Get Food By Category And Postal Code
     getFoodByCategoryAndCode: async (req, res) => {
         const { category, code } = req.params;
         try {
@@ -82,6 +84,7 @@ module.exports = {
             res.status(500).json({ status: false, message: e.message });
         }
     },
+    // Todo Search Food
     searchFoods: async (req, res) => {
         const { search } = req.params;
         try {
@@ -103,6 +106,7 @@ module.exports = {
             res.status(500).json({ status: false, message: e.message });
         }
     },
+    // Todo Get Random Food By Category And Code
     getRandomFoodsByCategoryAndCode: async (req, res) => {
         const { category, code } = req.params;
         try {

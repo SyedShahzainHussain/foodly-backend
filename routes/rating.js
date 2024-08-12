@@ -1,10 +1,10 @@
 const ratingController = require("../controllers/ratingController");
 const router = require("express").Router();
+const { verifyTokenAndAuthorization } = require("../middleware/verifyToken");
 
+router.post("/", verifyTokenAndAuthorization, ratingController.addRating);
 
-router.post("/",ratingController.addRating);
-
-router.get("/",ratingController.checkUserRating);
+router.get("/", verifyTokenAndAuthorization, ratingController.checkUserRating);
 
 
 module.exports = router;

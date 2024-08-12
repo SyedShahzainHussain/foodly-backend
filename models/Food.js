@@ -1,11 +1,12 @@
 const moongoose = require("mongoose");
 
 const FoodSchema = moongoose.Schema({
-    title: { type: String, required: true },
-    time: { type: String, required: true },
+    title: { type: String, required: true }, 
+    time: { type: String, required: true }, 
     foodTags: { type: Array, required: true },
+    foodType: { type: Array, default: [] },
+    additives: { type: Array, default: [] },
     category: { type: String, required: true },
-    foodType: { type: Array, default:[] },
     code: { type: String, required: true },
     isAvailable: { type: Boolean, default: true },
     restaurant: { type: moongoose.Schema.Types.ObjectId, required: true },
@@ -13,9 +14,7 @@ const FoodSchema = moongoose.Schema({
     ratingCount: { type: String, default: "267" },
     description: { type: String, required: true },
     price: { type: Number, required: true },
-    additives: { type: Array, default: [] },
     imageUrl: { type: Array, required: true },
-
 });
 
 module.exports = moongoose.model("Food", FoodSchema);

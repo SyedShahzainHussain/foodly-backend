@@ -2,6 +2,8 @@ const Restaurant = require("../models/Rasturant");
 
 
 module.exports = {
+
+    // Todo Create Restaurant
     createRestaurant: async (req, res) => {
         const { title, time, imageUrl, owner, code, logoUrl, coords } = req.body;
         if (!title || !time || !imageUrl || !owner || !code || !logoUrl || !coords || !coords.latitude || !coords.longitude || !coords.address || !coords.title) {
@@ -15,6 +17,7 @@ module.exports = {
             res.status(500).json({ status: false, message: error.message });
         }
     },
+    // Todo Get Restaurant by id
     getRestaurantById: async (req, res) => {
         const id = req.params.id;
         try {
@@ -24,7 +27,8 @@ module.exports = {
             res.status(500).json({ status: false, message: error.message });
         }
     },
-    getRandomRestaurant: async (req, res) => { 
+    // Todo Get Random Restaurant
+    getRandomRestaurant: async (req, res) => {
         const code = req.params.code;
         try {
             let randomRestaurant = [];
@@ -47,6 +51,7 @@ module.exports = {
             res.status(500).json({ status: false, message: error.message });
         }
     },
+    // Todo Get All Random Restaurant
     getAllNearByRestaurant: async (req, res) => {
         const code = req.params.code;
         try {
