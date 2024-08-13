@@ -9,6 +9,9 @@ const FoodRoute = require("./routes/food");
 const RatingRoute = require("./routes/rating");
 const AuthRoute = require("./routes/auth");
 const UserRoute = require("./routes/user");
+const AddressRoute = require("./routes/address");
+const CartRoute = require("./routes/cart");
+const OrderRoute = require("./routes/order");
 
 dotenv.config();
 
@@ -29,7 +32,10 @@ app.use("/api/category", CategoryRoute);
 app.use("/api/restaurant", RestaurantRoute);
 app.use("/api/foods", FoodRoute);
 app.use("/api/rating", RatingRoute);
-app.use("/users", UserRoute);
+app.use("/api/users", UserRoute);
+app.use("/api/address", AddressRoute);
+app.use("/api/cart", CartRoute);
+app.use("/api/order", OrderRoute);
 
 
 app.listen(process.env.PORT || 3000, () => console.log(`Backend Floodly listening on port ${process.env.PORT}`)

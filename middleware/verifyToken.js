@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 
 
-const verifyToken = async (req, res) => {
+const verifyToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (authHeader) {
-        const token = authHeader.splie(" ")[1];
+        const token = authHeader.split(" ")[1];
         jwt.verify(token, process.env.JWT_SECRET, async (error, user) => {
             if (error) {
                 return res.status(403).json({ status: false, message: "Invalid token" });
@@ -18,10 +18,13 @@ const verifyToken = async (req, res) => {
 }
 
 
-const verifyTokenAndAuthorization = async (req, res, next) => {
+const verifyTokenAndAuthorization = (req, res, next) => {
 
     verifyToken(req, res, () => {
-        if (req.user.userType === "Client" || req.user.userType === "Admin" || req.user.userType === "Vendor" || req.user.userType === "Driver") {
+        if (req.user.userType === "Client" ||
+            req.user.userType === "Admin" ||
+            req.user.userType === "Vendor" ||
+            req.user.userType === "Driver") {
             next();
         } else {
             return res.status(403).json({ status: false, message: "You are not allowed to do that!" });
@@ -29,7 +32,7 @@ const verifyTokenAndAuthorization = async (req, res, next) => {
     })
 }
 
-const verifyVender = async (req, res) => {
+const verifyVender = (req, res) => {
     verifyToken(req, res, () => {
         if (req.user.userType === "Admin" || req.user.userType === "Vendor") {
             next();
@@ -40,7 +43,7 @@ const verifyVender = async (req, res) => {
 }
 
 
-const verifyAdmin = async (req, res) => {
+const verifyAdmin = (req, res) => {
     verifyToken(req, res, () => {
         if (req.user.userType === "Admin") {
             next();
@@ -50,7 +53,7 @@ const verifyAdmin = async (req, res) => {
     })
 }
 
-const verifyDriver = async (req, res) => {
+const verifyDriver = (req, res) => {
     verifyToken(req, res, () => {
         if (req.user.userType === "Driver") {
             next();
