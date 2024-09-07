@@ -19,7 +19,7 @@ module.exports = {
     },
     // Todo Get Restaurant by id
     getRestaurantById: async (req, res) => {
-        const id = req.params.id;
+        const id = req.query.id;
         try {
             const resturant = await Restaurant.findById(id);
             res.status(200).json({ status: true, resturant });
@@ -29,7 +29,7 @@ module.exports = {
     },
     // Todo Get Random Restaurant
     getRandomRestaurant: async (req, res) => {
-        const code = req.params.code;
+        const code = req.query.code;
         try {
             let randomRestaurant = [];
             if (code) {
@@ -53,7 +53,7 @@ module.exports = {
     },
     // Todo Get All Random Restaurant
     getAllNearByRestaurant: async (req, res) => {
-        const code = req.params.code;
+        const code = req.query.code;
         try {
             let allNearByRestaurant = [];
             if (code) {

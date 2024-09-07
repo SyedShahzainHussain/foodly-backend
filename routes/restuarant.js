@@ -5,11 +5,11 @@ const { verifyTokenAndAuthorization } = require("../middleware/verifyToken");
 
 router.post("/", verifyTokenAndAuthorization, categoryController.createRestaurant);
 
-router.get("/:code", categoryController.getRandomRestaurant);
+router.get("/", categoryController.getRandomRestaurant);
 
-router.get("/all/:code", categoryController.getAllNearByRestaurant);
+router.get("/all/", categoryController.getAllNearByRestaurant);
 
-router.get("/byId/:id", categoryController.getRestaurantById);
+router.get("/byId/", categoryController.getRestaurantById);
 
 
 module.exports = router;

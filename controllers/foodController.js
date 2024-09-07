@@ -27,10 +27,20 @@ module.exports = {
             res.status(500).json({ status: false, message: error.message });
         }
     },
+    // Todo Get All Food By Code
+    getAllFoodByCode: async (req, res) => {
+        const code = req.query.code;
+        try {
+            const foodList = await Food.find({ code: code });
+            return res.status(200).json({ status: true, foodList });
+        } catch (error) {
+            res.status(500).json({ status: false, message: error.message });
+        }
+    },
     // Todo Get Random Food
     getRandomFood: async (req, res) => {
+        const code = req.query.code;
         try {
-            const code = req.params.code;
             let randomFoodList = [];
             if (code) {
                 randomFoodList = await Food.aggregate([
@@ -68,18 +78,20 @@ module.exports = {
     },
     // Todo Get Food By Category And Postal Code
     getFoodByCategoryAndCode: async (req, res) => {
-        const { category, code } = req.params;
+        const category = req.query.category;
+        const code = req.query.code;
         try {
             const foods = await Food.aggregate([
                 { $match: { category: category, code: code, isAvailable: true } },
                 { $project: { __v: 0 } },
             ]);
 
+            // Only send one response based on whether foods are found or not
             if (foods.length === 0) {
-                res.status(200).json({ status: true, message: [] });
+                return res.status(200).json({ status: true, foods: [] });
             }
-            res.status(200).json({ status: true, foods });
 
+            res.status(200).json({ status: true, foods });
         } catch (e) {
             res.status(500).json({ status: false, message: e.message });
         }
